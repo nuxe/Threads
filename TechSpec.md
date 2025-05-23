@@ -45,28 +45,36 @@ enum MessageRole: String, Codable {
 }
 ```
 
-### TCA Feature Structure
+### Folder Structure
 ```
-App/
-├── App/
-│   ├── AppFeature.swift
-│   └── AppView.swift
-├── Authentication/
-│   ├── AuthFeature.swift
-│   └── AuthView.swift
-├── ThreadList/
-│   ├── ThreadListFeature.swift
-│   └── ThreadListView.swift
-├── Chat/
-│   ├── ChatFeature.swift
-│   └── ChatView.swift
-├── Settings/
-│   ├── SettingsFeature.swift
-│   └── SettingsView.swift
-└── Shared/
-    ├── Models/
-    ├── Clients/
-    └── Extensions/
+Threads/
+├── Package.swift
+├── README.md
+└── Modules/                # New features go here
+    ├── Authentication/
+    │   ├── AuthStore.swift
+    │   └── AuthView.swift
+    ├── ThreadList/
+    │   ├── ThreadListStore.swift
+    │   └── ThreadListView.swift
+    ├── Chat/
+    │   ├── ChatStore.swift
+    │   └── ChatView.swift
+    ├── Settings/
+    │   ├── SettingsStore.swift
+    │   └── SettingsView.swift
+    ├── Models/             # New models go here
+    │   ├── Thread.swift
+    │   ├── Message.swift
+    │   └── User.swift
+    ├── Clients/            # New clients go here
+    │   ├── OpenAIClient.swift
+    │   ├── SupabaseClient.swift
+    │   └── AuthClient.swift
+    ├── Extensions/         # New extensions go here
+    │   └── View+Extensions.swift
+    └── UIComponents/       # Reusable UI components go here
+        └── LoadingView.swift
 ```
 
 ## Technical Roadmap
