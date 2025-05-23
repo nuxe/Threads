@@ -1,0 +1,34 @@
+# Xcode
+xcuserdata/
+DerivedData/
+
+# Build artifacts
+*.ipa
+*.dSYM.zip
+*.dSYM
+.build/
+
+# Swift
+*.hmap
+
+# Xcode Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+Packages/
+.swiftpm
+
+# CocoaPods (optional - only if using)
+# Pods/
+# *.xcworkspace
+
+# Carthage (optional - only if using)
+# Carthage/Checkouts
+Carthage/Build/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
