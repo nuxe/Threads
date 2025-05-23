@@ -14,6 +14,7 @@
 		434B6FFC2DE1281F002DB18A /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 434B6FFB2DE1281F002DB18A /* Realtime */; };
 		434B6FFE2DE1281F002DB18A /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 434B6FFD2DE1281F002DB18A /* Storage */; };
 		434B70002DE1281F002DB18A /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 434B6FFF2DE1281F002DB18A /* Supabase */; };
+		434B70032DE12C41002DB18A /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 434B70022DE12C41002DB18A /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 				434B6FF82DE1281F002DB18A /* Functions in Frameworks */,
 				434B6FF62DE1281F002DB18A /* Auth in Frameworks */,
 				434B6FFC2DE1281F002DB18A /* Realtime in Frameworks */,
+				434B70032DE12C41002DB18A /* ComposableArchitecture in Frameworks */,
 				434B6FF32DE12768002DB18A /* OpenAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +138,7 @@
 				434B6FFB2DE1281F002DB18A /* Realtime */,
 				434B6FFD2DE1281F002DB18A /* Storage */,
 				434B6FFF2DE1281F002DB18A /* Supabase */,
+				434B70022DE12C41002DB18A /* ComposableArchitecture */,
 			);
 			productName = Threads;
 			productReference = 434B6FC52DE11E6F002DB18A /* Threads.app */;
@@ -222,6 +225,7 @@
 			packageReferences = (
 				434B6FF12DE12768002DB18A /* XCRemoteSwiftPackageReference "OpenAI" */,
 				434B6FF42DE1281F002DB18A /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				434B70012DE12C41002DB18A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 434B6FC62DE11E6F002DB18A /* Products */;
@@ -604,6 +608,14 @@
 				version = 2.5.1;
 			};
 		};
+		434B70012DE12C41002DB18A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = exactVersion;
+				version = 1.20.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -641,6 +653,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 434B6FF42DE1281F002DB18A /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
+		};
+		434B70022DE12C41002DB18A /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 434B70012DE12C41002DB18A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
