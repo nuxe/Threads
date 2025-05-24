@@ -9,7 +9,7 @@ alwaysApply: false
 - [X] Create new iOS project with SwiftUI + TCA
 - [X] Add SPM dependencies (TCA, Supabase, OpenAI)
 - [ ] Set up basic app structure and navigation
-- [ ] Implement basic data models and TCA features
+- [ ] Implement skeleton files for core app features and setup navigation between them
 
 ### Phase 2: Core Chat Functionality
 - [ ] Implement OpenAI client wrapper
