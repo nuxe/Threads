@@ -46,26 +46,14 @@ struct ThreadListView: View {
     }
     
     private var emptyStateView: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "message.circle")
-                .font(.system(size: 64))
-                .foregroundColor(.secondary)
-            
-            Text("No threads yet")
-                .font(.title2)
-                .fontWeight(.semibold)
-            
-            Text("Start a new conversation to get going")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-            
-            Button("New Thread") {
-                store.send(.createNewThread)
-            }
-            .buttonStyle(.borderedProminent)
+        EmptyStateView(
+            systemImage: "message.circle",
+            title: "No threads yet",
+            message: "Start a new conversation to get going",
+            buttonTitle: "New Thread"
+        ) {
+            store.send(.createNewThread)
         }
-        .padding()
     }
     
     private var threadListView: some View {
@@ -85,37 +73,7 @@ struct ThreadListView: View {
     }
 }
 
-struct ThreadRowView: View {
-    let thread: Thread
-    let onTap: () -> Void
-    
-    var body: some View {
-        Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text(thread.title)
-                        .font(.headline)
-                        .lineLimit(1)
-                    
-                    Spacer()
-                    
-                    if let lastMessageAt = thread.lastMessageAt {
-                        Text(lastMessageAt, style: .relative)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                
-                Text("Tap to continue conversation")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .lineLimit(2)
-            }
-            .padding(.vertical, 4)
-        }
-        .buttonStyle(.plain)
-    }
-}
+// ThreadRowView is now in UIComponents
 
 #Preview {
     ThreadListView(

@@ -8,20 +8,8 @@ struct AuthView: View {
         NavigationView {
             VStack(spacing: 24) {
                 // Logo/Title
-                VStack(spacing: 8) {
-                    Image(systemName: "message.circle.fill")
-                        .font(.system(size: 64))
-                        .foregroundColor(.blue)
-                    
-                    Text("Threads")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                    
-                    Text(store.isSignUpMode ? "Create your account" : "Welcome back")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                .padding(.top, 40)
+                AppLogoView(subtitle: store.isSignUpMode ? "Create your account" : "Welcome back")
+                    .padding(.top, 40)
                 
                 // Form
                 VStack(spacing: 16) {
@@ -34,10 +22,7 @@ struct AuthView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                     if let errorMessage = store.errorMessage {
-                        Text(errorMessage)
-                            .foregroundColor(.red)
-                            .font(.caption)
-                            .padding(.horizontal)
+                        ErrorMessageView(errorMessage)
                     }
                     
                     LoadingButton(

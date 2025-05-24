@@ -55,9 +55,12 @@ Threads/
         └── LoadingView.swift
 ```
 
-### Key Principles
- - Build re-usable UI components whenever possible. Place them in Modules/UIComponents
-
+## Key Principles
+### UI
+- **Reusable**: Components are designed to be used in multiple contexts
+- **Reusable**: Reusable UI components live in Modules/UIComponents
+- **Configurable**: Most components accept parameters for customization
+- **Consistent**: All components follow the app's design system
 
 ## Key Technical Decisions
 

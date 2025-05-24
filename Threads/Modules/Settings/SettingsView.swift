@@ -11,77 +11,49 @@ struct SettingsView: View {
                 // User Section
                 if let user = store.currentUser {
                     Section("Account") {
-                        HStack {
-                            Image(systemName: "person.circle.fill")
-                                .font(.title)
-                                .foregroundColor(.blue)
-                            
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(user.displayName ?? "User")
-                                    .font(.headline)
-                                Text(user.email)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                            }
-                            
-                            Spacer()
-                        }
-                        .padding(.vertical, 4)
+                        SettingsRowView(
+                            systemImage: "person.circle.fill",
+                            title: user.displayName ?? "User",
+                            subtitle: user.email
+                        )
                     }
                 }
                 
                 // Actions Section
                 Section("Actions") {
-                    Button(action: {
+                    SettingsRowView(
+                        systemImage: "trash",
+                        title: "Clear Local Data",
+                        iconColor: .orange,
+                        isLoading: store.isLoading
+                    ) {
                         store.send(.clearData)
-                    }) {
-                        HStack {
-                            Image(systemName: "trash")
-                                .foregroundColor(.orange)
-                            Text("Clear Local Data")
-                                .foregroundColor(.primary)
-                            Spacer()
-                            if store.isLoading {
-                                ProgressView()
-                                    .scaleEffect(0.8)
-                            }
-                        }
                     }
-                    .disabled(store.isLoading)
                     
-                    Button(action: {
+                    SettingsRowView(
+                        systemImage: "rectangle.portrait.and.arrow.right",
+                        title: "Sign Out",
+                        iconColor: .red,
+                        textColor: .red,
+                        isLoading: store.isLoading
+                    ) {
                         store.send(.signOut)
-                    }) {
-                        HStack {
-                            Image(systemName: "rectangle.portrait.and.arrow.right")
-                                .foregroundColor(.red)
-                            Text("Sign Out")
-                                .foregroundColor(.red)
-                            Spacer()
-                            if store.isLoading {
-                                ProgressView()
-                                    .scaleEffect(0.8)
-                            }
-                        }
                     }
-                    .disabled(store.isLoading)
                 }
                 
                 // App Info Section
                 Section("App Information") {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text(store.appVersion)
-                            .foregroundColor(.secondary)
-                    }
+                    SettingsRowView(
+                        systemImage: "info.circle",
+                        title: "Version",
+                        value: store.appVersion
+                    )
                     
-                    HStack {
-                        Text("Build")
-                        Spacer()
-                        Text(store.buildNumber)
-                            .foregroundColor(.secondary)
-                    }
+                    SettingsRowView(
+                        systemImage: "hammer",
+                        title: "Build",
+                        value: store.buildNumber
+                    )
                 }
                 
                 // About Section
