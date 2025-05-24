@@ -1,0 +1,55 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+## Technical Roadmap
+
+### Phase 1: Foundation Setup
+- [X] Create new iOS project with SwiftUI + TCA
+- [X] Add SPM dependencies (TCA, Supabase, OpenAI)
+- [ ] Set up basic app structure and navigation
+- [ ] Implement basic data models and TCA features
+
+### Phase 2: Core Chat Functionality
+- [ ] Implement OpenAI client wrapper
+- [ ] Create ChatFeature with message sending/receiving
+- [ ] Build chat UI with message bubbles and input field
+- [ ] Add typing indicators and loading states
+- [ ] Implement real-time message streaming
+
+### Phase 3: Authentication
+- [ ] Configure Supabase project and database schema
+- [ ] Create Supabase auth client
+- [ ] Implement AuthFeature with login/signup actions
+- [ ] Build authentication UI screens
+- [ ] Add session persistence and automatic login
+- [ ] Handle auth state changes throughout app
+
+### Phase 4: Thread Management
+- [ ] Create ThreadListFeature for managing conversations
+- [ ] Implement thread CRUD operations with Supabase
+- [ ] Build thread list UI with swipe actions
+- [ ] Add thread search and filtering
+- [ ] Implement thread title auto-generation
+
+### Phase 5: Data Persistence
+- [ ] Set up Supabase database schema (threads, messages)
+- [ ] Implement repository pattern for data access
+- [ ] Add offline caching with local Core Data/SQLite
+- [ ] Sync local and remote data
+- [ ] Handle network connectivity states
+
+### Phase 6: Polish & Features
+- [ ] Add message copying and sharing
+- [ ] Implement dark/light theme support
+- [ ] Add haptic feedback and animations
+- [ ] Optimize performance for large conversation histories
+- [ ] Add settings screen for user preferences
+
+### Phase 7: Testing & Deployment
+- [ ] Unit tests for TCA reducers and effects
+- [ ] Integration tests for API clients
+- [ ] UI tests for critical user flows
+- [ ] TestFlight beta testing
+- [ ] App Store submission
