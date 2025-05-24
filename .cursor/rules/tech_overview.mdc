@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
 ## Technical Overview
 
 ### Architecture Stack
@@ -17,6 +22,8 @@
 ```
 
 ### Folder Structure
+Ensure you're following the folder structure outlined here when adding new files & features
+
 ```
 Threads/
 ├── Package.swift
@@ -47,6 +54,10 @@ Threads/
     └── UIComponents/       # Reusable UI components go here
         └── LoadingView.swift
 ```
+
+### Key Principles
+ - Build re-usable UI components whenever possible. Place them in Modules/UIComponents
+
 
 ## Key Technical Decisions
 
