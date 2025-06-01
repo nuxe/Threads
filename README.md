@@ -1,9 +1,9 @@
-# iOS ChatGPT Clone - Product Spec & Technical Overview
+# Threads - Product Spec & Technical Overview
 
 ## Product Specification
 
 ### Overview
-A lightweight iOS ChatGPT clone focused on conversational threads and message history. Users can create multiple conversation threads, send messages to OpenAI's API, and maintain persistent chat history across sessions.
+App focused on conversational threads and message history. Users can create multiple conversation threads, send messages to OpenAI's API, and maintain persistent chat history across sessions.
 
 ### Key Features
 - **Thread Management**: Create, view, and delete conversation threads
@@ -16,8 +16,7 @@ A lightweight iOS ChatGPT clone focused on conversational threads and message hi
 
 #### 1. Authentication Screen
 - Login/Signup forms
-- Social auth options (optional)
-- Password reset functionality
+- Social auth options
 
 #### 2. Thread List Screen (Main)
 - List of all conversation threads
@@ -36,6 +35,6 @@ A lightweight iOS ChatGPT clone focused on conversational threads and message hi
 
 #### 4. Settings Screen
 - Account management
-- OpenAI API key configuration (optional)
+- OpenAI API key configuration
 - Theme preferences
 - Clear all data option

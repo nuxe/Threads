@@ -2,7 +2,7 @@ import Foundation
 
 struct Thread: Codable, Identifiable, Equatable {
     let id: UUID
-    let title: String
+    var title: String
     let userID: UUID
     let createdAt: Date
     let updatedAt: Date

@@ -32,6 +32,7 @@ struct ChatStore {
         case streamingComplete
         case streamingError(Error)
         case deleteMessageResponse(Result<UUID, Error>)
+        case threadUpdated(Thread)
     }
     
     @Dependency(\.supabaseClient) var supabaseClient
@@ -156,11 +157,25 @@ struct ChatStore {
                     )
                     state.messages[loadingIndex] = finalMessage
                     
-                    // Save final message to database
-                    return .run { send in
+                    // Save final message to database and generate title if needed
+                    return .run { [messages = state.messages, thread = state.thread] send in
                         await send(.sendMessageResponse(Result {
                             try await supabaseClient.createMessage(finalMessage)
                         }))
+                        
+                        // Generate title if this is the first conversation and title is still "New Chat"
+                        if thread.title == "New Chat" && messages.count >= 2 {
+                            do {
+                                let title = try await openAIClient.generateTitle(messages)
+                                var updatedThread = thread
+                                updatedThread.title = title
+                                let updated = try await supabaseClient.updateThread(updatedThread)
+                                await send(.threadUpdated(updated))
+                            } catch {
+                                // Silently fail title generation - not critical
+                                print("Failed to generate title: \(error)")
+                            }
+                        }
                     }
                 }
                 return .none
@@ -178,6 +193,10 @@ struct ChatStore {
                 
             case let .deleteMessageResponse(.failure(error)):
                 state.errorMessage = error.localizedDescription
+                return .none
+                
+            case let .threadUpdated(thread):
+                state.thread = thread
                 return .none
             }
         }
