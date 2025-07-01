@@ -3,6 +3,13 @@ import SwiftUI
 struct MessageBubble: View {
     let message: Message
     let onDelete: () -> Void
+    let onRetry: (() -> Void)?
+    
+    init(message: Message, onDelete: @escaping () -> Void, onRetry: (() -> Void)? = nil) {
+        self.message = message
+        self.onDelete = onDelete
+        self.onRetry = onRetry
+    }
     
     var body: some View {
         HStack {
@@ -33,15 +40,43 @@ struct MessageBubble: View {
                         }
                     )
                 
-                Text(message.createdAt, style: .time)
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
+                HStack(spacing: 4) {
+                    Text(message.createdAt, style: .time)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                    
+                    if message.role == .user {
+                        statusIndicator
+                    }
+                }
+                
+                if message.status == .failed && onRetry != nil {
+                    Button(action: { onRetry?() }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "arrow.clockwise")
+                            Text("Retry")
+                        }
+                        .font(.caption)
+                        .foregroundColor(.blue)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.blue.opacity(0.1))
+                        .cornerRadius(8)
+                    }
+                }
             }
             .onLongPressGesture {
                 let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                 impactFeedback.impactOccurred()
                 
                 let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                
+                if message.status == .failed && onRetry != nil {
+                    alert.addAction(UIAlertAction(title: "Retry", style: .default) { _ in
+                        onRetry?()
+                    })
+                }
+                
                 alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
                     onDelete()
                 })
@@ -56,6 +91,24 @@ struct MessageBubble: View {
             if message.role == .assistant {
                 Spacer(minLength: 50)
             }
+        }
+    }
+    
+    @ViewBuilder
+    private var statusIndicator: some View {
+        switch message.status {
+        case .sending:
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .secondary))
+                .scaleEffect(0.5)
+        case .sent:
+            Image(systemName: "checkmark")
+                .font(.caption2)
+                .foregroundColor(.secondary)
+        case .failed:
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.caption2)
+                .foregroundColor(.red)
         }
     }
 }

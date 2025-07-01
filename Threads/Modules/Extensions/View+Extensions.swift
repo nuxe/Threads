@@ -31,7 +31,8 @@ extension View {
     @ViewBuilder
     func conditionalNavigationBarHidden(_ hidden: Bool) -> some View {
         if hidden {
-            self.navigationBarHidden(true)
+            self.navigationBarBackButtonHidden(true)
+                .navigationBarTitleDisplayMode(.large)
         } else {
             self
         }
