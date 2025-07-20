@@ -36,13 +36,11 @@ extension OpenAIClient: DependencyKey {
                         )
                         
                         // Stream the response
-                        var fullResponse = ""
                         let stream = openAI.chatsStream(query: query)
-                        
+
                         for try await result in stream {
                             if let content = result.choices.first?.delta.content {
-                                fullResponse += content
-                                continuation.yield(fullResponse)
+                                continuation.yield(content)
                             }
                         }
                         
