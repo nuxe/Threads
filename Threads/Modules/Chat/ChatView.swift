@@ -16,20 +16,30 @@ struct ChatView: View {
                     ScrollView {
                         LazyVStack(spacing: 12) {
                             ForEach(store.messages) { message in
-                                MessageBubble(message: message) {
-                                    store.send(.deleteMessage(message.id))
-                                }
+                                MessageBubble(
+                                    message: message,
+                                    onDelete: {
+                                        store.send(.deleteMessage(message.id))
+                                    },
+                                    onRetry: message.status == .failed ? {
+                                        store.send(.retryMessage(message.id))
+                                    } : nil
+                                )
                                 .id(message.id)
+                            }
+                            
+                            if store.isStreaming {
+                                AITypingIndicator()
+                                    .id("typing-indicator")
                             }
                         }
                         .padding()
                     }
                     .onChange(of: store.messages.count) { _, _ in
-                        if let lastMessage = store.messages.last {
-                            withAnimation(.easeOut(duration: 0.3)) {
-                                proxy.scrollTo(lastMessage.id, anchor: .bottom)
-                            }
-                        }
+                        scrollToBottom(proxy: proxy)
+                    }
+                    .onChange(of: store.isStreaming) { _, _ in
+                        scrollToBottom(proxy: proxy)
                     }
                 }
             }
@@ -61,6 +71,19 @@ struct ChatView: View {
         }
         .onAppear {
             store.send(.onAppear)
+        }
+        .onDisappear {
+            store.send(.onDisappear)
+        }
+    }
+    
+    private func scrollToBottom(proxy: ScrollViewReader) {
+        withAnimation(.easeOut(duration: 0.3)) {
+            if store.isStreaming {
+                proxy.scrollTo("typing-indicator", anchor: .bottom)
+            } else if let lastMessage = store.messages.last {
+                proxy.scrollTo(lastMessage.id, anchor: .bottom)
+            }
         }
     }
 }

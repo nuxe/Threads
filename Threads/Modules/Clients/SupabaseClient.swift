@@ -191,12 +191,13 @@ private struct MessageDTO: Codable {
     
     func toMessage() -> Message {
         let formatter = ISO8601DateFormatter()
-        return Message(
+                            return Message(
             id: UUID(uuidString: id) ?? UUID(),
             threadID: UUID(uuidString: threadId) ?? UUID(),
-            role: Message.Role(rawValue: role) ?? .user,
+            role: MessageRole(rawValue: role) ?? .user,
             content: content,
-            createdAt: formatter.date(from: createdAt) ?? Date()
+            createdAt: formatter.date(from: createdAt) ?? Date(),
+            status: .sent // Messages from database are considered sent
         )
     }
 }
